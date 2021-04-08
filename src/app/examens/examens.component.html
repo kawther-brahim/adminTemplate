@@ -1,0 +1,154 @@
+<div class="main-content" id="main-container">
+   <div class=" col-md-12">
+   <div class="card" >
+   <div class="card-header card-header-info">
+      <h4 class="card-title">Gestion Des Examens</h4>
+     <button (click)="onOpenModal(null, 'add')"  type="button"  class="btn btn-secondary " value="Ajouter">Ajouter</button>
+   <button (click)="goToPage('archiveExamen')" type="button" class="btn btn-outline-secondary"  value="archiver">archive</button>
+
+<div class="searchbar">
+<input class="search_input" type="text" name="" placeholder="Search..." (ngModelChange)="searchExamen(key.value)" #key="ngModel" ngModel
+name="key" id="searchName">
+<a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+</div> 
+</div>
+</div>
+</div>
+    <div class=" col-md-16">
+        
+        <div class="container">
+            <div class="row clearfix" >
+                <div class="col-md-3 col-sm-6 col-xs-12" *ngFor = "let examen of examens">
+                    <div class="boxs project_widget">
+                        <div class="pw_img">
+                        <img class="img-responsive" src="https://via.placeholder.com/280x280/87CEFA/000000" alt="About the image">
+                        </div>                            
+                    <div class="pw_content">
+                        <div class="pw_header">
+                            <h4>{{examen.libelle}} </h4>
+                            <h8 class="text-muted">{{examen.niveau}}</h8>
+                        </div>
+                        <div class="pw_meta">
+                            <span>{{examen.specialite}}</span>
+                            <small class="text-muted">{{examen.prix}} DT </small>
+                            <small class="text-success"> 
+                                <button (click)="onOpenModal(examen, 'edit')" style="color: gold;"  mat-raised-button type="button" matTooltip="Modifier examens" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                <i class="material-icons">edit</i>
+                                </button>
+                                <button (click)="onOpenModal(examen, 'delete')"  mat-raised-button type="button" matTooltip="Archiver" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                <i class="material-icons">archiver</i>
+                                </button>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+                
+<!--delete-->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Archiver Examen</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Êtes-vous sûr de vouloir archiver l'examen {{deleteExamen?.libelle}} ?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button (click)="onDeleteExamen(deleteExamen?.id)"  class="btn btn-danger" data-dismiss="modal" (click)="showNotification('top','center','delete')">Oui</button>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+
+<!--edit-->        
+<div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateEmployeeModalLabel">Modifier Examens {{editExamen?.libelle}}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+
+                <div class="form-group">
+                   <label for="Libelle">Libelle</label>
+                   <input type="text" ngModel="{{editExamen?.libelle}}" name="Libelle" class="form-control" id="Libelle" >
+                </div>
+              
+                <div class="form-group">
+                   <label for="Niveau">Niveau</label>
+                   <input type="text" ngModel="{{editExamen?.niveau}}" class="form-control" name="niveau" class="form-control" id="niveau"   >
+                </div>
+                <div class="form-group">
+                    <label for="Specialite">Specialité</label>
+                    <input type="text" ngModel="{{editExamen?.specialite}}"  class="form-control" name="specialite" class="form-control" id="specialite"   >
+                 </div>
+                 <div class="form-group">
+                    <label for="Prix">Prix</label>
+                    <input type="number" ngModel="{{editExamen?.prix}}" class="form-control" name="prix" class="form-control" id="prix"   >
+                 </div>
+
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                   <button (click)="onUpdateExamen(editExamen?.id,editForm.value)" data-dismiss="modal" class="btn btn-success" (click)="showNotification('top','center','update')" >Enregistre</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+
+
+            <!--add-->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="addEmployeeModalLabel">Ajouter Examen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-body">
+                        <form #addForm="ngForm" (ngSubmit)="onAddExamen(addForm)">
+
+                            
+                        <div class="form-group">
+                           <label for="libelle">Libelle</label>
+                           <input type="text" ngModel name="libelle" class="form-control" id="libelle" required>
+                        </div>
+                        <div class="form-group">
+                           <label for="niveau">Niveau</label>
+                           <input type="text" ngModel name="niveau" class="form-control" id="niveau"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialite">Specialité</label>
+                            <input type="text" ngModel name="specialite" class="form-control" id="specialite"  required>
+                         </div>
+                         <div class="form-group">
+                            <label for="prix">Prix</label>
+                            <input type="number" ngModel name="prix" class="form-control" id="prix"  required>
+                         </div>
+                        
+                        <div class="modal-footer">
+                           <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                           <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" (click)="showNotification('top','center','add')">Enregistre</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                </div>
+                </div>

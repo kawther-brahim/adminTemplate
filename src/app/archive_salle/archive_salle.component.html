@@ -1,0 +1,33 @@
+<div class="main-content">
+   <div class=" col-md-12">
+       <div class="card" >
+           <div class="card-header card-header-info">
+               <h4 class="card-title">Archive Des Salles</h4>
+
+     <div class="searchbar">
+       <input class="search_input" type="text" name="" placeholder="Search..." (ngModelChange)="searchSalle(key.value)" #key="ngModel" ngModel
+       name="key" id="searchName" >
+       <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+   </div> 
+   
+           </div>
+           <div class="container" id="main-container">
+               <div class="row">
+           <div class="card-body table-responsive">
+               <table class="text-center" class="table table-hover">
+                   <thead class="text ">
+                       <th>Numéro</th>
+                       <th>Nom</th>
+                       <th>Capacité</th>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor = "let salle of salles;let i=index">
+                           <td> {{ i+1}}</td>
+                           <td> {{ salle.nom}}</td>
+                           <td> {{ salle.capacite}}</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+               </div>
+           </div>

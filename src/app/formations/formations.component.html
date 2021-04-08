@@ -1,0 +1,76 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+        <ejs-schedule width='100%' height='550px' [selectedDate]='selectedDate' (actionBegin)="addclick($event)" [views]='views'  (actionBegin)="onActionBegin($event)" cssClass='schedule-excel-export'   [eventSettings]='eventSettings' [showQuickInfo]='showQuickInfo' (popupOpen)='onPopupOpen($event)' *ngFor = "let formation of formations" >
+    <ng-template #editorTemplate>
+        <table class="custom-event-editor" width="100%" cellpadding="5">
+            <tbody>
+                <tr>
+                    <td class="e-textlabel">Libelle</td>
+                    <td colspan="4">
+                        <input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="e-textlabel">Specialité</td>
+                    <td colspan="4">
+                        <input id="specialite" class="e-field e-input" type="text" value="" name="specialite" style="width: 100%" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="e-textlabel">Prix</td>
+                    <td colspan="4">
+                        <input id="prix" class="e-field e-input" type="number" value="" name="prix" style="width: 100%" />
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td class="e-textlabel">De</td>
+                    <td colspan="4">
+                        <input id="StartTime" class="e-field" type="text" name="StartTime" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="e-textlabel">A</td>
+                    <td colspan="4">
+                        <input id="EndTime" class="e-field" type="text" name="EndTime" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="e-textlabel">Support de cours</td>
+                    <td colspan="4">
+                        <input id="cours" class="e-field e-input" type="text" value="" name="cours" style="width: 100%" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="e-textlabel">Formateur</td>
+                    <td colspan="4">
+                        <input type="text" id="formateur" name="formateur" class="e-field" style="width: 100%" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="e-textlabel">Salle</td>
+                    <td colspan="4">
+                        <input  type="text" id="salle" name="salle" class="e-field" style="width: 100%" />
+                    </td>
+                </tr>
+              
+            </tbody>
+        </table>
+
+    </ng-template>
+
+    </ejs-schedule>
+      </div>
+  </div>
+</div>
+
+<!-- <tr>
+                    <td class="e-textlabel">Status</td>
+                    <td colspan="4">
+                        <input type="text" id="EventType" name="EventType" class="e-field" style="width: 100%" />
+                    </td>
+                </tr>-->

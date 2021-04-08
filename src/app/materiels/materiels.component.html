@@ -1,0 +1,172 @@
+<div class="main-content">
+    <div class=" col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Gestion des Materiels</h4>
+                <p class="card-category"></p>
+                <button (click)="onOpenModal(null, 'add')"  type="button"  class="btn btn-secondary " value="Ajouter">Ajouter</button>
+                <button (click)="goToPage('archiveMateriels')" type="button" class="btn btn-outline-secondary"  value="archiver">archive</button>
+                <div class="searchbar">
+                  <input class="search_input" type="text" name="" placeholder="Search..." (ngModelChange)="searchMateriel(key.value)" #key="ngModel" ngModel
+                  name="key" id="searchName" >
+                  <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+              </div> 
+            </div>
+            <div class="container" id="main-container">
+    
+            <div class="card-body table-responsive">
+                <table class="text-center" class="table table-hover">
+                    <thead class="text">
+                     
+                        <th>Numéro</th>
+                        <th>Référence</th>
+                        <th>Nom</th>
+                        <th>Etat</th>
+                    <th>Salle</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let materiel of materiels;let i=index">
+                            
+                            <td>{{ i+1}}</td>
+                            <td>{{ materiel.reference}}</td>
+                            <td>{{ materiel.nom}}</td>
+                            <td>{{ materiel.etat}}</td>
+                            <td>{{ materiel.salle.nom}}</td>
+                            
+                            <td class="td-actions">
+                                <button (click)="onOpenModal(materiel,'update')" style="color: gold;" mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                                <button (click)="onOpenModal(materiel,'delete')"  mat-raised-button type="button" matTooltip="archiver" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                    <i class="material-icons">archiver</i>
+                        
+                                </button>
+                            </td>
+                        </tr>
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+            <div class="modal fade" id="addMateriel" tabindex="-1" role="dialog" aria-labelledby="addMaterielModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="addMaterielModalLabel">Ajouter Materiel</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-body">
+                        <form [formGroup]="MaterielForm"  >
+
+                           <div class="form-group">
+                              <label for="reference">Référence</label>
+                              <input type="text"  [formControl]="MaterielForm.controls.reference"  name="reference" class="form-control" id="reference" required  >
+                           </div>
+
+
+                        <div class="form-group">
+                           <label for="nom">Nom</label>
+                           <input type="text"  [formControl]="MaterielForm.controls.nom" name="nom" class="form-control" id="nom" placeholder="Nom" required>
+                        </div>
+                        <div class="form-group">
+                           <label for="etat">Etat</label>
+                           <input type="text" [formControl]="MaterielForm.controls.etat" name="Etat" class="form-control" id="etat" placeholder="Etat" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="salle">Salle</label>
+                            <select #selectedSalle  class="custom-select" name="salle">
+                                <option selected >Choose...</option>
+                                <option *ngFor="let salle of salles" [value]="salle.id"> {{salle.nom}}</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" id="add-Materiel" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                           <button  (click)="onAddMateriel(selectedSalle.value)" type="submit" class="btn btn-success" (click)="showNotification('top','center','add')">Enregistre</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                </div>
+                </div>
+
+
+
+
+                <div class="modal fade" id="updateMateriel" tabindex="-1" role="dialog" aria-labelledby="materielEditModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                          <div class="modal-header">
+                             <h5 class="modal-title" id="updateMaterielModalLabel">Update Materiel </h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                             </button>
+                          </div>
+                          <div class="modal-body">
+                             <form [FormGroup]="MaterielForm1">
+                                
+                              <div class="form-group">
+                                 <label for="reference">Référence</label>
+                                 <input type="text"  [formControl]="MaterielForm1.controls.reference" ngModel="{{updateMateriel?.reference}}" name="reference" class="form-control" id="reference" aria-describedby="emailHelp" disabled >
+                              </div>
+                             
+                                <div class="form-group">
+                                   <label for="nom">Nom</label>
+                                   <input type="text"  [formControl]="MaterielForm1.controls.nom" ngModel="{{updateMateriel?.nom}}" name="nom" class="form-control" id="nom" aria-describedby="emailHelp" >
+                                </div>
+                               
+                                <div class="form-group">
+                                   <label for="etat">Etat</label>
+                                   <input type="text" [formControl]="MaterielForm1.controls.etat" ngModel="{{updateMateriel?.etat}}" name="etat" class="form-control" id="etat" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="salle">Salle</label>
+            
+                                    <select #selectedSalles class="custom-select"  name="salle">
+                                       <option>{{updateMateriel?.salle.nom}}</option>
+                                        <option *ngFor="let salle of salles"   [value]="salle.id" > {{salle.nom}}</option>
+                                    </select>
+                                </div>
+                             
+                                <div class="modal-footer">
+                                   <button  type="button" id=""  data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                                   <button  (click)="onUpdateMateriel(updateMateriel?.reference,selectedSalles.value)" data-dismiss="modal" class="btn btn-success" (click)="showNotification('top','center','update')">Enregistre</button>
+                                </div>
+                             </form>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                <div class="modal fade" id="deleteMateriel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                          <div class="modal-header">
+                             <h5 class="modal-title" id="deleteModelLabel">Archiver Un Materiel</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                             </button>
+                          </div>
+                          <div class="modal-body">
+                             <p>Are you sure you want to delete Materiel ?</p>
+                             <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button (click)="onDeleteMateriel(deleteMateriel?.reference)"  class="btn btn-danger" data-dismiss="modal"  (click)="showNotification('top','center','delete')">oui</button>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+            </div>
+</div></div></div>

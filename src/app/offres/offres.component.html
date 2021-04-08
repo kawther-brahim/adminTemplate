@@ -1,0 +1,53 @@
+<div class="main-content" id="main-container">
+    <div> 
+    <button (click)="onOpenModal(null, 'add')" type="button"  class="btn btn-primary " value="Ajouter">Ajouter</button>
+    <button (click)="goToPage('icons')" type="button" class="btn btn-outline-secondary"  value="archiver">archiver</button>
+</div>
+    <div class=" col-md-16">
+        <div class="container">
+  
+    <div class="tab-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+        <div role="tabpanel" class="tab-pane fade show active" id="yearly">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4 mb-30" *ngFor = "let offre of offres">
+                    <div class="price-item text-center popular">
+                        <div class="price-top">
+                            <h4>{{offre.libelle}}</h4>
+                            <h2 class="mb-0"><sup>DT</sup>{{offre.prix}}</h2>
+                            <span class="text-capitalize">per year</span>
+                        </div>
+                        <div class="price-content">
+                            <ul class="border-bottom mb-30 mt-md-4 pb-3 text-left">
+                                <li>
+                                    <i class="zmdi zmdi-check mr-2"></i>
+                                    <span class="c-black"></span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check mr-2"></i>
+                                    <span class="c-black">Cras justo odio</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check mr-2"></i>
+                                    <span class="c-black">Morbi leo risus</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-close mr-2"></i>
+                                    <span>Porta consectetur ac</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-close mr-2"></i>
+                                    <span> Vestibulum at eros</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-close mr-2"></i>
+                                    <span>Adipisci atque beatae</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn btn-custom btn-light">Buy now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

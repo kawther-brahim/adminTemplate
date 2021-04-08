@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class=" col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Archive des Materiels</h4>
+                <p class="card-category"></p>
+              
+                <div class="searchbar">
+                  <input class="search_input" type="text" name="" placeholder="Search..." (ngModelChange)="searchMateriel(key.value)" #key="ngModel" ngModel
+                  name="key" id="searchName">
+                  <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+              </div> 
+            </div>
+            <div class="container" id="main-container">
+    
+            <div class="card-body table-responsive">
+                <table class="text-center" class="table table-hover">
+                    <thead class="text">
+                     
+                        <th>Numéro</th>
+                        <th>Référence</th>
+                        <th>Nom</th>
+                        <th>Etat</th>
+                    <th>Salle</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let materiel of materiels;let i=index">
+                            
+                            <td>{{ i+1}}</td>
+                            <td>{{ materiel.reference}}</td>
+                            <td>{{ materiel.nom}}</td>
+                            <td>{{ materiel.etat}}</td>
+                            <td>{{ materiel.salle.nom}}</td>
+                           
+                        </tr>
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+
